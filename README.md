@@ -1,4 +1,4 @@
-# My web portfolio
+# Portfolio
 
 The website template is stolen from:
   Dimension by HTML5 UP
