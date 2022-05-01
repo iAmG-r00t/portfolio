@@ -73,6 +73,13 @@ body {
 }
 
 /* SIDE NAV */
+#BackBtn {
+    position: absolute !important;
+    padding: 1px !important;
+    top: -5 !important;
+    left: 0;
+    font-size: 43px !important;
+}
 
 #sidenavBtn {
     position: absolute !important;
@@ -121,7 +128,18 @@ body {
     background:none !important;
     border:none;
 }
-#sidenav button:hover {
+#sidenav btton {
+    padding: 8px 8px 8px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15pt;
+    color: white;
+    display: none;
+    transition: 0.3s;
+    background:none !important;
+    border:none;
+}
+#sidenav button:hover, #Sidenav btton:hover {
     color: #e09f14;
 }
 
