@@ -4,6 +4,6 @@ The website template is stolen from: Dimension by HTML5 UP. Free for personal an
   
 Credits: AJ [ajlkn](https://aj.lkn.io/) | [@ajlkn](https://twitter.com/ajlkn)
   
-The fake terminal is stolen from: [Luo Huang](https://github.com/louh/fake-terminal)
+The fake terminal is stolen from: [Luís Bragança](https://github.com/luisbraganca/fake-terminal-website)
  
 Awesome project right there...
