@@ -16,6 +16,7 @@ Awesome project right here.
   - [ ] Implement two keyboard key shortcuts;
     - [ ] Ctrl + L : for clearing the screen.
     - [ ] Ctrl + C : to stop the typewritting.
+  - [ ] Fix a bug, cat a file not present makes the terminal hang.
   - [ ] Maybe get some inspirations from the below:
     - [Vintage Screen Effects](https://codepen.io/collection/AeGGxz) 
     - [Terminal Things](https://codepen.io/collection/Mgrkmw)
