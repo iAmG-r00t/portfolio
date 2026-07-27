@@ -15,7 +15,7 @@
         document.documentElement.dataset.timeOfDay =
           hour >= 6 && hour < 18 ? "day" : "night";
         document.documentElement.dataset.darkMode =
-          sessionStorage.getItem("portfolioDarkMode") === "on" ? "on" : "off";
+          sessionStorage.getItem("portfolioDarkMode") || "auto";
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -83,7 +83,7 @@
         <span class="about-theme-toggle__track" aria-hidden="true">
           <span class="about-theme-toggle__thumb"></span>
         </span>
-        <span>dark mode</span>
+        <span class="about-theme-toggle__label">dark mode</span>
       </button>
     </main>
 

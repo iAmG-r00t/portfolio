@@ -12,10 +12,23 @@
   const copyrightYear = document.getElementById("copyright-year");
 
   copyrightYear.textContent = new Date().getFullYear();
-  const savedDarkMode =
-    window.sessionStorage.getItem("portfolioDarkMode") === "on";
-  themeToggle.setAttribute("aria-checked", String(savedDarkMode));
-  themeColor.setAttribute("content", savedDarkMode ? "#090b0d" : "#574f49");
+  const themeLabel = themeToggle.querySelector(".theme-toggle__label");
+  const isNightTime = document.documentElement.dataset.timeOfDay === "night";
+  const getDarkMode = () => {
+    const preference = window.sessionStorage.getItem("portfolioDarkMode");
+    return preference === "on" || (preference === null && isNightTime);
+  };
+  const updateThemeToggle = (isDark) => {
+    themeToggle.setAttribute("aria-checked", String(isDark));
+    themeToggle.setAttribute(
+      "aria-label",
+      isDark ? "Switch to light mode" : "Switch to dark mode",
+    );
+    themeLabel.textContent = isDark ? "light mode" : "dark mode";
+    themeColor.setAttribute("content", isDark ? "#090b0d" : "#574f49");
+  };
+
+  updateThemeToggle(getDarkMode());
 
   const bootLines = [
     '<span class="ok">[ ok ]</span> waking display adapter',
@@ -117,10 +130,10 @@
   });
 
   themeToggle.addEventListener("click", () => {
-    const isOn = themeToggle.getAttribute("aria-checked") !== "true";
-    themeToggle.setAttribute("aria-checked", String(isOn));
-    document.documentElement.dataset.darkMode = isOn ? "on" : "off";
-    window.sessionStorage.setItem("portfolioDarkMode", isOn ? "on" : "off");
-    themeColor.setAttribute("content", isOn ? "#090b0d" : "#574f49");
+    const useDarkMode = themeToggle.getAttribute("aria-checked") !== "true";
+    const preference = useDarkMode ? "on" : "off";
+    document.documentElement.dataset.darkMode = preference;
+    window.sessionStorage.setItem("portfolioDarkMode", preference);
+    updateThemeToggle(useDarkMode);
   });
 })();

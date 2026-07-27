@@ -3,17 +3,29 @@
 
   const toggle = document.getElementById("about-theme-toggle");
   const themeColor = document.querySelector('meta[name="theme-color"]');
-  const savedDarkMode =
-    window.sessionStorage.getItem("portfolioDarkMode") === "on";
+  const themeLabel = toggle.querySelector(".about-theme-toggle__label");
+  const isNightTime = document.documentElement.dataset.timeOfDay === "night";
+  const getDarkMode = () => {
+    const preference = window.sessionStorage.getItem("portfolioDarkMode");
+    return preference === "on" || (preference === null && isNightTime);
+  };
+  const updateThemeToggle = (isDark) => {
+    toggle.setAttribute("aria-checked", String(isDark));
+    toggle.setAttribute(
+      "aria-label",
+      isDark ? "Switch to light mode" : "Switch to dark mode",
+    );
+    themeLabel.textContent = isDark ? "light mode" : "dark mode";
+    themeColor.setAttribute("content", isDark ? "#0b0d0e" : "#5c5751");
+  };
 
-  toggle.setAttribute("aria-checked", String(savedDarkMode));
-  themeColor.setAttribute("content", savedDarkMode ? "#0b0d0e" : "#5c5751");
+  updateThemeToggle(getDarkMode());
 
   toggle.addEventListener("click", () => {
-    const isOn = toggle.getAttribute("aria-checked") !== "true";
-    toggle.setAttribute("aria-checked", String(isOn));
-    document.documentElement.dataset.darkMode = isOn ? "on" : "off";
-    window.sessionStorage.setItem("portfolioDarkMode", isOn ? "on" : "off");
-    themeColor.setAttribute("content", isOn ? "#0b0d0e" : "#5c5751");
+    const useDarkMode = toggle.getAttribute("aria-checked") !== "true";
+    const preference = useDarkMode ? "on" : "off";
+    document.documentElement.dataset.darkMode = preference;
+    window.sessionStorage.setItem("portfolioDarkMode", preference);
+    updateThemeToggle(useDarkMode);
   });
 })();

@@ -187,6 +187,10 @@ html[data-dark-mode="on"] .scene {
   background-image: url("../../images/night-overlook.png");
 }
 
+html[data-dark-mode="off"] .scene {
+  background-image: url("../../images/sunrise-overlook.png");
+}
+
 .scene-shade {
   z-index: -3;
   background:
@@ -204,6 +208,12 @@ html[data-dark-mode="on"] .scene-shade {
   background:
     linear-gradient(90deg, rgba(4, 6, 7, 0.52) 0%, rgba(4, 6, 7, 0.24) 48%, transparent 76%),
     linear-gradient(0deg, rgba(4, 6, 7, 0.28), transparent 52%);
+}
+
+html[data-dark-mode="off"] .scene-shade {
+  background:
+    linear-gradient(90deg, rgba(22, 22, 21, 0.68) 0%, rgba(22, 22, 21, 0.36) 48%, transparent 76%),
+    linear-gradient(0deg, rgba(26, 22, 19, 0.2), transparent 52%);
 }
 
 .stars {
@@ -224,6 +234,10 @@ html[data-time-of-day="day"] .stars {
 
 html[data-dark-mode="on"] .stars {
   display: block;
+}
+
+html[data-dark-mode="off"] .stars {
+  display: none;
 }
 
 .leaves {
@@ -632,6 +646,10 @@ h1 a:focus-visible {
 
   html[data-dark-mode="on"] .scene-shade {
     background: linear-gradient(90deg, rgba(4, 6, 7, 0.87), rgba(4, 6, 7, 0.56));
+  }
+
+  html[data-dark-mode="off"] .scene-shade {
+    background: linear-gradient(90deg, rgba(22, 22, 21, 0.84), rgba(22, 22, 21, 0.48));
   }
 
   .intro {

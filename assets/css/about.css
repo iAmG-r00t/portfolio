@@ -60,6 +60,10 @@ html[data-dark-mode="on"] .about-scene {
   background-image: url("../../images/about-night.png");
 }
 
+html[data-dark-mode="off"] .about-scene {
+  background-image: url("../../images/about-day.png");
+}
+
 .about-shade {
   z-index: -1;
   background: rgba(2, 4, 5, 0.28);
@@ -71,6 +75,10 @@ html[data-time-of-day="day"] .about-shade {
 
 html[data-dark-mode="on"] .about-shade {
   background: rgba(2, 4, 5, 0.34);
+}
+
+html[data-dark-mode="off"] .about-shade {
+  background: rgba(9, 9, 8, 0.26);
 }
 
 .back-link {
