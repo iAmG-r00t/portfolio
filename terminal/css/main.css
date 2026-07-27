@@ -140,8 +140,9 @@ body {
 }
 
 #sidenav button.file-button {
-    font-family: "Comic Sans MS", "Segoe Print", cursive !important;
+    font-family: "Dancing Script", cursive !important;
     font-weight: 600 !important;
+    font-size: 18pt;
 }
 
 /* Keep the branded menu control above the generic sidebar-button reset. */
