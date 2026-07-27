@@ -15,11 +15,17 @@
       "aria-label",
       isDark ? "Switch to light mode" : "Switch to dark mode",
     );
-    themeLabel.textContent = isDark ? "light mode" : "dark mode";
+    themeLabel.textContent = isDark ? "dark mode" : "light mode";
     themeColor.setAttribute("content", isDark ? "#0b0d0e" : "#5c5751");
   };
 
   updateThemeToggle(getDarkMode());
+  window.addEventListener("pageshow", () => {
+    const isDark = getDarkMode();
+    document.documentElement.dataset.darkMode =
+      window.sessionStorage.getItem("portfolioDarkMode") || "auto";
+    updateThemeToggle(isDark);
+  });
 
   toggle.addEventListener("click", () => {
     const useDarkMode = toggle.getAttribute("aria-checked") !== "true";

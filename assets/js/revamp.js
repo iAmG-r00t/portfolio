@@ -24,11 +24,17 @@
       "aria-label",
       isDark ? "Switch to light mode" : "Switch to dark mode",
     );
-    themeLabel.textContent = isDark ? "light mode" : "dark mode";
+    themeLabel.textContent = isDark ? "dark mode" : "light mode";
     themeColor.setAttribute("content", isDark ? "#090b0d" : "#574f49");
   };
 
   updateThemeToggle(getDarkMode());
+  window.addEventListener("pageshow", () => {
+    const isDark = getDarkMode();
+    document.documentElement.dataset.darkMode =
+      window.sessionStorage.getItem("portfolioDarkMode") || "auto";
+    updateThemeToggle(isDark);
+  });
 
   const bootLines = [
     '<span class="ok">[ ok ]</span> waking display adapter',
