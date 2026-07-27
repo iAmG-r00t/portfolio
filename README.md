@@ -13,11 +13,11 @@ Awesome project right here.
 - Future planning:
   - [x] Implement a back button for terminal. (take you back to the main page/parent location).
   - [x] Add custom footer to side navigation bar (for social media).
-  - [ ] Implement two keyboard key shortcuts;
-    - [ ] Ctrl + L : for clearing the screen.
-    - [ ] Ctrl + C : to stop the typewritting.
-  - [ ] Fix a bug, cat a file not present makes the terminal hang.
-  - [ ] Maybe get some inspirations from the below:
+  - [x] Implement two keyboard key shortcuts; (Added in the new site)
+    - [x] Ctrl + L : for clearing the screen.
+    - [x] Ctrl + C : to stop the typewritting.
+  - [x] Fix a bug, cat a file not present makes the terminal hang. (Fixed in the new version)
+  - [x] Maybe get some inspirations from the below: (Added in the new version)
     - [Vintage Screen Effects](https://codepen.io/collection/AeGGxz) 
     - [Terminal Things](https://codepen.io/collection/Mgrkmw)
     - [Web simulation of UbuntuOS](https://github.com/vivek9patel/vivek9patel.github.io), this guy is a beast.
