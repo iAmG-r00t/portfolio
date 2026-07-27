@@ -30,6 +30,7 @@ body {
     clear: both;
     width: 100%;
 }
+
 #prompt {
     white-space: nowrap;
     display: -webkit-box;
@@ -77,10 +78,25 @@ body {
 
 #sidenavBtn {
     position: absolute !important;
-    padding: 2px !important; 
-    top: 0 !important;
-    right: 7px !important;
-    font-size: 35px !important;
+    width: 42px;
+    height: 42px;
+    padding: 0 !important;
+    top: 5px !important;
+    right: 4px !important;
+    border-radius: 7px;
+    background-color: #808080 !important;
+    background-image: url("../img/sidebar-rook.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    color: transparent;
+    font-size: 34px !important;
+    line-height: 42px;
+}
+
+#sidenavBtn.is-open {
+    background-image: none !important;
+    color: white;
 }
 
 #sidenav {
@@ -121,6 +137,33 @@ body {
     transition: 0.3s;
     background:none !important;
     border:none;
+}
+
+#sidenav button.file-button {
+    font-family: "Comic Sans MS", "Segoe Print", cursive !important;
+    font-weight: 600 !important;
+}
+
+/* Keep the branded menu control above the generic sidebar-button reset. */
+#sidenav #sidenavBtn {
+    display: block;
+    width: 42px;
+    height: 42px;
+    padding: 0 !important;
+    border: 0;
+    border-radius: 7px;
+    background-color: #808080 !important;
+    background-image: url("../img/sidebar-rook.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    color: transparent;
+    cursor: pointer;
+}
+
+#sidenav #sidenavBtn.is-open {
+    background-image: none !important;
+    color: white;
 }
 #sidenav btton {
     padding: 8px 8px 8px 35px;

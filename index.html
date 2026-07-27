@@ -1,91 +1,140 @@
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <title>th3_gr00t</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="shortcut icon" href="images/tab-icon.png" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#090b0d" />
+    <meta
+      name="description"
+      content="th3_gr00t — vulnerability research, reverse engineering, hardware, and oddly specific scripts."
+    />
+    <title>th3_gr00t</title>
+    <script>
+      (() => {
+        document.documentElement.classList.add("has-js");
+        const hour = new Date().getHours();
+        document.documentElement.dataset.timeOfDay =
+          hour >= 6 && hour < 18 ? "day" : "night";
+        document.documentElement.dataset.darkMode =
+          sessionStorage.getItem("portfolioDarkMode") === "on" ? "on" : "off";
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Kalam:wght@700&family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="images/rook-favicon.png" />
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="assets/css/revamp.css?v=3" />
   </head>
-  <body class="is-preload">
+  <body class="is-booting">
+    <div class="boot-screen" id="boot-screen" aria-label="Starting th3_gr00t OS">
+      <div class="boot-noise" aria-hidden="true"></div>
+      <div class="boot-shell">
+        <div class="boot-heading">
+          <span class="boot-brand">
+            <span class="boot-mark" aria-hidden="true">♜</span>
+            <span>th3_gr00t/os</span>
+          </span>
+          <span class="boot-status" id="boot-status">scanning</span>
+        </div>
+        <div class="boot-output" id="boot-output" aria-live="polite"></div>
+        <button class="boot-skip" id="boot-skip" type="button">skip [esc]</button>
+      </div>
+    </div>
 
-    <!-- Wrapper -->
-      <div id="wrapper">
-
-        <!-- Header -->
-          <header id="header">
-            <div class="logo">
-              <span class="fas fa-chess-rook fa-2x"></span>
-            </div>
-            <div class="content">
-              <div class="inner">
-                <p>Hello, I am <a href="https://twitter.com/th3_gr00t">th3_gr00t</a>.<br/><br/>
-                A nerd on a Journery to Vulnerability Research.</p>
-              </div>
-            </div>
-            <nav>
-              <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="https://blog.th3-gr00t.net/" target="_blank">Blog</a></li>
-                <li><a href="terminal/index.html">Terminal</a></li>
-                <li><a href="https://wiki.th3-gr00t.net/" target="_blank">Wiki</a></li>
-              </ul>
-            </nav>
-          </header>
-
-        <!-- Main -->
-          <div id="main">
-
-            <!-- Mantra -->
-              <article id="about">
-                <h2 class="major">About Me</h2>
-                <span class="image main"><img src="images/mantra.png" alt="" /></span>
-
-                <p>Since when I was a young boy I enjoyed tinkering with devices to get to understand how they work. The thrill came from disassembling the device, analyzing every part, and later successfully assembling back the device in one piece and getting it to work.</p>
-                <p>I have a Bachelor's degree in Information Systems and Technology with over three years experience in the security industry.</p>
-                <p>I enjoy doing the following:
-                <ul>
-                  <li>Reverse Engineering
-                  <li>Binary Exploitation
-                  <li>Network Research
-                  <li>Code Review
-                  <li>Junk Hacking
-                  <li>Hardware Hacking
-                  <li>DevOps and Automation
-                  <li>Programming
-                  <li>Contributing to Open Source Software (OSS)
-                  <li>Writing whacky scripts
-                </ul>
-                </p>
-
-              </article>
-
-          </div>
-
-        <!-- Footer -->
-          <footer id="footer">
-            <ul class="icons">
-              <li><a href="https://twitter.com/th3_gr00t/" target="_blank" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-              <li><a href="https://www.linkedin.com/in/peter-numi-b14b71145/" target="_blank" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
-              <li><a href="https://github.com/iAmG-r00t/" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-              <li><a href="https://discordapp.com/users/gr00t#8077" target="_blank" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
-            </ul>
-            <p class="copyright">&copy; groot</p>
-          </footer>
-
+    <main class="home" id="home">
+      <div class="scene" aria-hidden="true"></div>
+      <div class="scene-shade" aria-hidden="true"></div>
+      <div class="stars" aria-hidden="true"></div>
+      <div class="leaves" aria-hidden="true">
+        <i style="--x: 8%; --delay: -3s; --duration: 14s; --drift: 16vw"></i>
+        <i style="--x: 24%; --delay: -10s; --duration: 18s; --drift: 10vw"></i>
+        <i style="--x: 39%; --delay: -6s; --duration: 16s; --drift: 20vw"></i>
+        <i style="--x: 54%; --delay: -12s; --duration: 20s; --drift: 12vw"></i>
+        <i style="--x: 68%; --delay: -1s; --duration: 17s; --drift: 15vw"></i>
+        <i style="--x: 84%; --delay: -8s; --duration: 19s; --drift: 8vw"></i>
       </div>
 
-    <!-- BG -->
-      <div id="bg"></div>
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        type="button"
+        role="switch"
+        aria-checked="false"
+        aria-label="Use night background"
+      >
+        <span class="theme-toggle__track" aria-hidden="true">
+          <span class="theme-toggle__thumb"></span>
+        </span>
+        <span class="theme-toggle__label">dark mode</span>
+      </button>
 
-    <!-- Scripts -->
-      <script src="assets/js/jquery.min.js"></script>
-      <script src="assets/js/browser.min.js"></script>
-      <script src="assets/js/breakpoints.min.js"></script>
-      <script src="assets/js/util.js"></script>
-      <script src="assets/js/main.js"></script>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">somewhere between curiosity and chaos</p>
+        <div class="greeting">
+          <h1 id="page-title">
+            Hello, i'm
+            <a href="https://x.com/th3_gr00t" target="_blank" rel="noreferrer">th3_gr00t</a>.
+          </h1>
+        </div>
+        <p class="tagline">
+          A nerd on a journey to being a skilled 0day vulnerability researcher.
+        </p>
+        <p class="summary">
+          Intention is at the heart of my every discussion, driven by curiosity.
+          I love to take things apart to understand how they work.
+        </p>
+        <nav class="links" aria-label="Main links">
+          <a href="about.html">about</a>
+          <a href="https://blog.th3-gr00t.net/" target="_blank" rel="noreferrer">blog</a>
+          <a href="https://wiki.th3-gr00t.net/" target="_blank" rel="noreferrer">wiki</a>
+          <a href="terminal/index.html">terminal</a>
+        </nav>
+      </section>
 
+      <footer class="site-footer">
+        <nav class="social-links" aria-label="Social profiles">
+          <a
+            href="https://x.com/th3_gr00t"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-twitter" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/peter-numi-b14b71145/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn"
+          >
+            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://github.com/iAmG-r00t/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
+            <i class="fab fa-github" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://discordapp.com/users/gr00t#8077"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Discord"
+          >
+            <i class="fab fa-discord" aria-hidden="true"></i>
+          </a>
+        </nav>
+        <p class="copyright">@GR00T <span id="copyright-year"></span></p>
+      </footer>
+
+    </main>
+
+    <script src="assets/js/revamp.js?v=3"></script>
   </body>
 </html>

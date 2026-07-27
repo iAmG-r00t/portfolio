@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171717" />
+    <meta
+      name="description"
+      content="About th3_gr00t — curiosity, security research, and a lifelong habit of taking things apart."
+    />
+    <title>about | th3_gr00t</title>
+    <script>
+      (() => {
+        const hour = new Date().getHours();
+        document.documentElement.dataset.timeOfDay =
+          hour >= 6 && hour < 18 ? "day" : "night";
+        document.documentElement.dataset.darkMode =
+          sessionStorage.getItem("portfolioDarkMode") === "on" ? "on" : "off";
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Kalam:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="images/rook-favicon.png" />
+    <link rel="stylesheet" href="assets/css/about.css" />
+  </head>
+  <body>
+    <main class="about-page">
+      <div class="about-scene" aria-hidden="true"></div>
+      <div class="about-shade" aria-hidden="true"></div>
+
+      <a class="back-link" href="index.html" aria-label="Back to homepage">← home</a>
+
+      <article class="about-panel" aria-labelledby="about-title">
+        <header class="about-panel__header">
+          <h1 id="about-title">about.txt</h1>
+          <a href="index.html" aria-label="Close About page">×</a>
+        </header>
+
+        <blockquote class="mantra-quote">
+          <span>If I cannot do great things,</span>
+          I can do small things in a great way.
+        </blockquote>
+
+        <p class="about-story">
+          Since I was a young boy, I have always enjoyed tinkering with devices
+          to understand how they work. The thrill came from disassembling a
+          device, analyzing its internals, and then successfully putting it back
+          together and watching it boot up again.
+        </p>
+
+        <section class="interests" aria-labelledby="interests-title">
+          <h2 id="interests-title">I enjoy the following:</h2>
+          <ul>
+            <li>Reverse Engineering</li>
+            <li>Binary Exploitation</li>
+            <li>Network Research</li>
+            <li>Code Review</li>
+            <li>Junk Hacking</li>
+            <li>Hardware Hacking</li>
+            <li>DevOps &amp; Automation</li>
+            <li>Writing whacky scripts and code</li>
+          </ul>
+        </section>
+
+        <p class="about-aside">
+          When I am not staring at a debugger, there is probably anime playing
+          somewhere nearby.
+        </p>
+      </article>
+
+      <button
+        class="about-theme-toggle"
+        id="about-theme-toggle"
+        type="button"
+        role="switch"
+        aria-checked="false"
+        aria-label="Use night background"
+      >
+        <span class="about-theme-toggle__track" aria-hidden="true">
+          <span class="about-theme-toggle__thumb"></span>
+        </span>
+        <span>dark mode</span>
+      </button>
+    </main>
+
+    <script src="assets/js/about.js"></script>
+  </body>
+</html>

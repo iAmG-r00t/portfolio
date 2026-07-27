@@ -34,7 +34,7 @@ var main = (function () {
             }
         };
         Singleton.defaultOptions = {
-            general_help: "Below there's a list of commands that you can use.\nYou can use autofill by pressing the TAB key, autocompleting if there's only 1 possibility, or showing you a list of possibilities.",
+            general_help: "Below is a list of available commands and terminal features.\n\nKeyboard features:\n\nTAB: autocomplete commands and filenames\nENTER: instantly finish active typewriter output\nCTRL + C: interrupt active typewriter output\nCTRL + L: clear the terminal screen\nDouble-click: instantly finish active typewriter output\n\nCommands:",
             ls_help: "List information about the files and folders (the current directory by default).",
             cat_help: "Read FILE(s) content and print it to the standard output (screen).",
             whoami_help: "Print the user name associated with the current effective user ID and more info.",
@@ -78,7 +78,7 @@ var main = (function () {
             }
         };
         Singleton.defaultOptions = {
-            "about.txt": "Hello, I am th3_gr00t.\n\nA nerd who is on a journey to being a Vulnerability Researcher (depending on when you are reading this).\n\nSince when I was a young boy I enjoyed tinkering with devices to get to understand how they work. The thrill came from disassembling the device, analyzing every part, and later successfully assembling back the device in one piece and getting it to work which led to me enjoying tinkering, building, and breaking stuff.\n\nI enjoy doing the following:\n--\x3e Reverse Engineering and Binary Exploitation\n--\x3e Network Research\n--\x3e Code Review\n--\x3e Junk Hacking\n--\x3e Hardware Hacking\n--\x3e DevOps and Automation\n--\x3e Programming\n--\x3e Contributing to Open Source Software (OSS)\n--\x3e Writing whacky script.",
+            "about.txt": "Hello, I am th3_gr00t.\n\nA nerd who is on a journey to being a skilled 0day vulnerability researcher.\n\nSince I was a young boy, I have always enjoyed tinkering with devices to understand how they work. The thrill came from disassembling a device, analyzing its internals, and then successfully putting it back together and watching it boot up again. All this led to me falling in love with the process of tinkering, building, and breaking stuff.",
             "interests.txt": "Hobbies and Favs:\n--\x3e Cycling\n--\x3e Mortocycles\n--\x3e Playing games (Blackshot Global Die Hard Player)\n--\x3e Offroad Motor sports (YT Channels; Red Bull Rampage, The Mint 400, Baja 1000 and Extreme Enduro)\n--\x3e Watching Movies and Anime\n--\x3e Eating Good food\n--\x3e Awesome Technology\n--\x3e Travelling\n--\x3e Intellectual conversations plus content\n--\x3e DIY stuff\n--\x3e Planning to attend Baja 1000 and The Mint 400"
         };
         return {
@@ -212,6 +212,26 @@ var main = (function () {
                 ignoreEvent(event);
             }
         }.bind(this));
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" && this.typeSimulator.complete()) {
+                ignoreEvent(event);
+                return;
+            }
+
+            if (!event.ctrlKey) {
+                return;
+            }
+
+            var key = event.key.toLowerCase();
+            if (key === "l") {
+                this.typeSimulator.stop(true);
+                this.clear();
+                ignoreEvent(event);
+            } else if (key === "c") {
+                this.typeSimulator.stop(false);
+                ignoreEvent(event);
+            }
+        }.bind(this));
         this.reset();
     };
 
@@ -241,6 +261,7 @@ var main = (function () {
         })();
         for (var file in files.getInstance()) {
             var element = document.createElement("button");
+            element.classList.add("file-button");
             Terminal.makeElementDisappear(element);
             element.onclick = function (file, event) {
                 this.handleSidenav(event);
@@ -261,7 +282,9 @@ var main = (function () {
             this.foot.style.opacity = 0;
             this.sidenavElements.forEach(Terminal.makeElementDisappear);
             this.sidenav.style.width = "50px";
-            document.getElementById("sidenavBtn").innerHTML = "&#9776;";
+            document.getElementById("sidenavBtn").innerHTML = "";
+            document.getElementById("sidenavBtn").classList.remove("is-open");
+            document.getElementById("sidenavBtn").setAttribute("aria-label", "Open navigation");
             document.getElementById("BackBtn").style.display = "none";
             this.sidenavOpen = false;
         } else {
@@ -270,6 +293,8 @@ var main = (function () {
             document.getElementById("BackBtn").style.display = "block";
             document.getElementById("BackBtn").innerHTML = "&#8249;";
             document.getElementById("sidenavBtn").innerHTML = "&times;";
+            document.getElementById("sidenavBtn").classList.add("is-open");
+            document.getElementById("sidenavBtn").setAttribute("aria-label", "Close navigation");
             this.profilePic.style.opacity = 1;
             this.foot.style.opacity = 1;
             this.sidenavOpen = true;
@@ -317,16 +342,17 @@ var main = (function () {
         if ((cmdComponents.length <= 1) || (cmdComponents.length === 2 && cmdComponents[0] === cmds.CAT.value)) {
             this.lock();
             var possibilities = [];
-            if (cmdComponents[0].toLowerCase() === cmds.CAT.value) {
+            var isCatCompletion = cmdComponents[0].toLowerCase() === cmds.CAT.value;
+            if (isCatCompletion) {
                 if (cmdComponents.length === 1) {
                     cmdComponents[1] = "";
                 }
                 if (configs.getInstance().welcome_file_name.startsWith(cmdComponents[1].toLowerCase())) {
-                    possibilities.push(cmds.CAT.value + " " + configs.getInstance().welcome_file_name);
+                    possibilities.push(configs.getInstance().welcome_file_name);
                 }
                 for (var file in files.getInstance()) {
                     if (file.startsWith(cmdComponents[1].toLowerCase())) {
-                        possibilities.push(cmds.CAT.value + " " + file);
+                        possibilities.push(file);
                     }
                 }
             } else {
@@ -337,7 +363,7 @@ var main = (function () {
                 }
             }
             if (possibilities.length === 1) {
-                this.cmdLine.value = possibilities[0] + " ";
+                this.cmdLine.value = (isCatCompletion ? cmds.CAT.value + " " : "") + possibilities[0] + " ";
                 this.unlock();
             } else if (possibilities.length > 1) {
                 this.type(possibilities.join("\n"), function () {
@@ -389,7 +415,9 @@ var main = (function () {
         var result;
         if (cmdComponents.length <= 1) {
             result = configs.getInstance().usage + ": " + cmds.CAT.value + " <" + configs.getInstance().file + ">";
-        } else if (!cmdComponents[1] || (!cmdComponents[1] === configs.getInstance().welcome_file_name && !files.getInstance().hasOwnProperty(cmdComponents[1]))) {
+        } else if (!cmdComponents[1] ||
+            (cmdComponents[1] !== configs.getInstance().welcome_file_name &&
+                !files.getInstance().hasOwnProperty(cmdComponents[1]))) {
             result = configs.getInstance().file_not_found.replace(configs.getInstance().value_token, cmdComponents[1]);
         } else {
             result = cmdComponents[1] === configs.getInstance().welcome_file_name ? configs.getInstance().welcome : files.getInstance()[cmdComponents[1]];
@@ -473,6 +501,27 @@ var main = (function () {
         }
         this.timer = timer;
         this.output = output;
+        this.active = false;
+        this.stopRequested = false;
+        this.stopSilently = false;
+        this.completeRequested = false;
+    };
+
+    TypeSimulator.prototype.stop = function (silently) {
+        if (!this.active) {
+            return false;
+        }
+        this.stopRequested = true;
+        this.stopSilently = Boolean(silently);
+        return true;
+    };
+
+    TypeSimulator.prototype.complete = function () {
+        if (!this.active) {
+            return false;
+        }
+        this.completeRequested = true;
+        return true;
     };
 
     TypeSimulator.prototype.type = function (text, callback) {
@@ -487,12 +536,42 @@ var main = (function () {
         var i = 0;
         var output = this.output;
         var timer = this.timer;
+        var simulator = this;
         var skipped = false;
+        this.active = true;
+        this.stopRequested = false;
+        this.stopSilently = false;
+        this.completeRequested = false;
         var skip = function () {
             skipped = true;
         }.bind(this);
         document.addEventListener("dblclick", skip);
         (function typer() {
+            if (simulator.completeRequested) {
+                output.innerHTML += text.substring(i).replace(new RegExp("\n", "g"), "<br/>") + "<br/>";
+                simulator.active = false;
+                simulator.completeRequested = false;
+                document.removeEventListener("dblclick", skip);
+                if (callback) {
+                    callback();
+                }
+                scrollToBottom();
+                return;
+            }
+
+            if (simulator.stopRequested) {
+                simulator.active = false;
+                simulator.stopRequested = false;
+                document.removeEventListener("dblclick", skip);
+                if (!simulator.stopSilently) {
+                    output.innerHTML += "^C<br/>";
+                }
+                if (callback) {
+                    callback();
+                }
+                scrollToBottom();
+                return;
+            }
             if (i < text.length) {
                 var char = text.charAt(i);
                 var isNewLine = char === "\n";
@@ -502,11 +581,15 @@ var main = (function () {
                     setTimeout(typer, isNewLine ? timer * 2 : timer);
                 } else {
                     output.innerHTML += (text.substring(i).replace(new RegExp("\n", 'g'), "<br/>")) + "<br/>";
+                    simulator.active = false;
                     document.removeEventListener("dblclick", skip);
-                    callback();
+                    if (callback) {
+                        callback();
+                    }
                 }
             } else if (callback) {
                 output.innerHTML += "<br/>";
+                simulator.active = false;
                 document.removeEventListener("dblclick", skip);
                 callback();
             }
